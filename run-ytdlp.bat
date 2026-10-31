@@ -7,19 +7,21 @@ if "%~1"=="" goto registrar
 
 :: Recebe e recupera a URL enviada pelo Chrome
 set "url=%~1"
-set "url=%url:ytdlp://=%"
-set "url=%url:https//=https://%"
-set "url=%url:http//=http://%"
+:: Ativa expansao tardia apos receber o argumento, preservando ! nas URLs
+setlocal EnableDelayedExpansion
+set "url=!url:ytdlp://=!"
+set "url=!url:https//=https://!"
+set "url=!url:http//=http://!"
 
 :: Usa a pasta do próprio BAT como destino
 cd /d "%~dp0"
 
 echo Baixando em: %CD%
-echo URL: %url%
+echo URL: !url!
 echo.
 
 :: Baixa e abre o Explorer com o arquivo selecionado
-yt-dlp --exec "after_move:explorer.exe /select," "%url%"
+yt-dlp --exec "after_move:explorer.exe /select," "!url!"
 
 if errorlevel 1 pause
 exit /b
