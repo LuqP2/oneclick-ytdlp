@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Enviar para yt-dlp",
+  "version": "1.0",
+  "description": "Envia a URL da aba atual para o yt-dlp via PowerShell",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_title": "Baixar com yt-dlp"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
